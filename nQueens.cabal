@@ -119,6 +119,7 @@ library nQueens-lib
   exposed-modules:
     NQueens
     NQueens.NaiveList
+    NQueens.BetterList
     NQueens.Pretty
     NQueens.Utils
 
@@ -133,7 +134,9 @@ test-suite nQueens-test
   main-is:        Main.hs
   hs-source-dirs: test
   build-depends:  nQueens-lib
-  other-modules:  Spec.NaiveList
+  other-modules:  
+    Spec.NaiveList
+    Spec.BetterList
 
 test-suite nQueens-space
   import:         shared, test-deps

@@ -96,6 +96,7 @@
           space = {
             description = "Run space benchmarks";
             exec = ''
+              cabal build test:nQueens-space
               cabal run test:nQueens-space -- --markdown > space.md
             '';
             category = "Dev Tools";

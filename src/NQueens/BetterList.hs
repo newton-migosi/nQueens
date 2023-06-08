@@ -1,22 +1,20 @@
-module NQueens.NaiveList where
+module NQueens.BetterList where
 
-type Solution = [Position]
-type Position = (Int, Int)
+import Data.IntMap.Strict qualified as IntMap
 
-queens :: Int -> [Solution]
-queens dim = foldlM go [] [1 .. dim]
+queens :: Int -> [IntMap Int]
+queens dim = foldlM go IntMap.empty [1 .. dim]
   where
-    go placed column = do
+    go placed col = do
       row <- [1 .. dim]
-      let queen = (row, column)
-      guard $ all (safe queen) placed
-      pure (queen : placed)
+      guard $ getAll $ safe (row, col) placed
+      pure $ IntMap.insert row col placed
 
 --------------------------------------------------------------------------------
 
-safe ::
-  forall (a :: Type). (Eq a, Num a) => (a, a) -> (a, a) -> Bool
-safe x y = not $ attacking x y
+safe :: (Int, Int) -> IntMap.IntMap Int -> All
+safe (r, c) = IntMap.foldMapWithKey $ \r' c' ->
+  All $ not $ attacking (r, c) (r', c')
 {-# INLINE safe #-}
 
 attacking :: forall (a :: Type). (Eq a, Num a) => (a, a) -> (a, a) -> Bool
@@ -39,5 +37,3 @@ horizontal ::
   forall (a :: Type) (x :: Type) (y :: Type). Eq a => (a, x) -> (a, y) -> Bool
 horizontal (r, _) (r', _) = r == r'
 {-# INLINE horizontal #-}
-
---------------------------------------------------------------------------------
