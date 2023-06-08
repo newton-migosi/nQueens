@@ -1,0 +1,16 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "nQueens:lib:nQueens-lib"
+
+    - path: "./Main.hs"
+      component: "nQueens:exe:nQueens"
+
+    - path: "test"
+      component: "nQueens:test:nQueens-test"
+
+    - path: "bench/space"
+      component: "nQueens:test:nQueens-space"
+
+    - path: "bench/time/Main.hs"
+      component: "nQueens:bench:nQueens-time"

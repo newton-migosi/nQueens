@@ -1,6 +1,7 @@
 {
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
+    "editor.tabSize": 2,
     "haskell.formattingProvider": "fourmolu",
     "haskell.manageHLS": "PATH",
     "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix"

@@ -82,7 +82,7 @@
           test = {
             description = "Run all tests";
             exec = ''
-              ghcid -c "cabal repl test:tests" -T :main
+              ghcid -c "cabal repl nQueens:test:nQueens-test" -T :main
             '';
             category = "Primary";
           };
