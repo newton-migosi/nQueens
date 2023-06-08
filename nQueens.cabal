@@ -119,9 +119,9 @@ library nQueens-lib
   exposed-modules:
     NQueens
     NQueens.NaiveList
-    NQueens.BetterList
     NQueens.Pretty
     NQueens.Utils
+    NQueens.Types
 
 executable nQueens
   import:        shared
@@ -136,7 +136,6 @@ test-suite nQueens-test
   build-depends:  nQueens-lib
   other-modules:  
     Spec.NaiveList
-    Spec.BetterList
 
 test-suite nQueens-space
   import:         shared, test-deps
