@@ -1,15 +1,16 @@
 module Main where
 
 import Main.Utf8 qualified as Utf8
-import NQueens qualified
-import NQueens.Pretty qualified as PrettyQueens
 import Prettyprinter qualified as Pretty
+
+import NQueens.NaiveList qualified as NaiveList
+import NQueens.Pretty qualified as PrettyQueens
 
 main :: IO ()
 main = Utf8.withUtf8 $ do
   let
     nQueens = 8
-    res = NQueens.queens nQueens
+    res = NaiveList.queens nQueens
     showQueens =
       PrettyQueens.fromSparseMatrix nQueens
         >>> PrettyQueens.sparseMatrixToDoc

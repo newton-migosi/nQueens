@@ -118,7 +118,9 @@ library nQueens-lib
   hs-source-dirs:  src
   exposed-modules:
     NQueens
+    NQueens.NaiveList
     NQueens.Pretty
+    NQueens.Utils
 
 executable nQueens
   import:        shared
@@ -131,6 +133,7 @@ test-suite nQueens-test
   main-is:        Main.hs
   hs-source-dirs: test
   build-depends:  nQueens-lib
+  other-modules:  NQueens.NaiveList
 
 test-suite nQueens-space
   import:         shared, test-deps

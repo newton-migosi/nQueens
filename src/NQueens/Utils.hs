@@ -1,0 +1,1 @@
+module NQueens.Utils where
