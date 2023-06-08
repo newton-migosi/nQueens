@@ -116,7 +116,9 @@ common test-deps
 library nQueens-lib
   import:          shared
   hs-source-dirs:  src
-  exposed-modules: NQueens
+  exposed-modules:
+    NQueens
+    NQueens.Pretty
 
 executable nQueens
   import:        shared
