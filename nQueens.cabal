@@ -1,0 +1,127 @@
+cabal-version:   3.0
+name:            nQueens
+
+
+version:         0.1.0.0
+license:         NONE
+build-type:      Simple
+
+common shared
+  ghc-options:
+    -Wall -Wincomplete-record-updates -Wincomplete-uni-patterns
+    -Wmissing-deriving-strategies -Wunused-foralls -Wunused-foralls
+    -fprint-explicit-foralls -fprint-explicit-kinds
+
+  mixins:
+    base hiding (Prelude),
+    relude (Relude as Prelude, Relude.Container.One),
+    relude
+
+  default-extensions:
+    NoFieldSelectors
+    NoStarIsType
+    BangPatterns
+    ConstraintKinds
+    DataKinds
+    DeriveAnyClass
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DerivingStrategies
+    DerivingVia
+    DuplicateRecordFields
+    EmptyCase
+    EmptyDataDecls
+    EmptyDataDeriving
+    ExistentialQuantification
+    ExplicitForAll
+    FlexibleContexts
+    FlexibleInstances
+    GADTSyntax
+    GeneralisedNewtypeDeriving
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    LinearTypes
+    MultiParamTypeClasses
+    MultiWayIf
+    NumericUnderscores
+    OverloadedLabels
+    OverloadedStrings
+    PolyKinds
+    PostfixOperators
+    RankNTypes
+    ScopedTypeVariables
+    StandaloneDeriving
+    StandaloneKindSignatures
+    TupleSections
+    TypeApplications
+    TypeFamilies
+    TypeOperators
+    UnicodeSyntax
+    ViewPatterns
+
+  build-depends:
+    , aeson
+    , async
+    , attoparsec
+    , base              >=4.13.0.0 && <4.18.0.0.0
+    , data-default
+    , directory
+    , exceptions
+    , fast-logger
+    , filepath
+    , foldl
+    , generic-lens
+    , io-streams
+    , linear-base
+    , monad-logger
+    , mtl
+    , newtype
+    , optics-core
+    , optics-th
+    , optparse-generic
+    , prettyprinter
+    , profunctors
+    , relude            >=1.0
+    , resource-pool
+    , resourcet
+    , safe-exceptions
+    , scientific
+    , shower
+    , th-env
+    , time
+    , with-utf8
+    , logict
+
+  default-language:   Haskell2010
+
+common test-deps
+  build-depends:
+    , hspec
+    , HUnit
+    , HUnit-approx
+    , QuickCheck
+    , tasty
+
+library nQueens-lib
+    import:           shared
+    hs-source-dirs:   src
+    exposed-modules:  NQueens
+
+executable nQueens
+    import:           shared
+    main-is:          Main.hs
+    build-depends:
+      , nQueens-lib
+
+test-suite nQueens-test
+    import:           shared, test-deps
+    type:             exitcode-stdio-1.0
+    main-is:          Main.hs
+    build-depends:
+      , nQueens
