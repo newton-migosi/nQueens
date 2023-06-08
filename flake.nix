@@ -82,9 +82,23 @@
           test = {
             description = "Run all tests";
             exec = ''
-              ghcid -c "cabal repl nQueens:test:nQueens-test" -T :main
+              ghcid -c "cabal repl test:nQueens-test" -T :main
             '';
             category = "Primary";
+          };
+          bench = {
+            description = "Run time benchmarks";
+            exec = ''
+              cabal run bench:nQueens-time -- --output bench.html
+            '';
+            category = "Dev Tools";
+          };
+          space = {
+            description = "Run space benchmarks";
+            exec = ''
+              cabal run test:nQueens-space -- --markdown > space.md
+            '';
+            category = "Dev Tools";
           };
         };
 
