@@ -1,18 +1,36 @@
 module Main where
 
-import NQueens.NaiveList qualified as NaiveList
+import Control.Monad.Logic (Logic, observeAll)
+
 import Weigh (Weigh, func, wgroup)
 import Weigh qualified
 
+import NQueens.BacktrackingSearch qualified as BacktrackingSearch
+
 main :: IO ()
 main = Weigh.mainWith $ do
-  wgroup "naiveList" naiveList
+  wgroup "listMonad" listMonad
+  wgroup "logictMonad" logictMonad
   pass
 
-naiveList :: Weigh ()
-naiveList = do
-  func "naive list 1" NaiveList.queens 1
-  func "naive list 3" NaiveList.queens 3
-  func "naive list 5" NaiveList.queens 5
-  func "naive list 8" NaiveList.queens 8
-  func "naive list 10" NaiveList.queens 10
+listMonad :: Weigh ()
+listMonad = do
+  let solver n =
+        let ?dimension = n
+         in BacktrackingSearch.solve @[]
+  func "list (n=1, s=1)" solver 1
+  func "list (n=3, s=0)" solver 3
+  func "list (n=5, s=10)" solver 5
+  func "list (n=8, s=92)" solver 8
+  func "list (n=10, s=724)" solver 10
+
+logictMonad :: Weigh ()
+logictMonad = do
+  let solver n =
+        let ?dimension = n
+         in observeAll $ BacktrackingSearch.solve @Logic
+  func "logict (n=1, s=1)" solver 1
+  func "logict (n=3, s=0)" solver 3
+  func "logict (n=5, s=10)" solver 5
+  func "logict (n=8, s=92)" solver 8
+  func "logict (n=10, s=724)" solver 10

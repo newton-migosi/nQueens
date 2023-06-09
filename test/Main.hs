@@ -3,9 +3,9 @@ module Main where
 import Main.Utf8 qualified as Utf8
 import Test.Hspec (describe, hspec)
 
-import Spec.NaiveList qualified as NaiveList
+import Spec.BacktrackingSearch qualified as BacktrackingSearch
 
 main :: IO ()
 main = Utf8.withUtf8 $ hspec $ do
-  describe "naive list" NaiveList.spec
+  describe "backtracking search" BacktrackingSearch.spec
   pass

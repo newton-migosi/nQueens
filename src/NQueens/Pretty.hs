@@ -1,23 +1,20 @@
 module NQueens.Pretty where
 
+import Data.Set qualified as Set
 import Prettyprinter (Doc, hsep, vsep)
 
-import NQueens.Types (Position (Position))
+import NQueens.Types (
+  Dimension,
+  Position (Position),
+  Solution,
+  mkSquareMatrix,
+ )
 
-newtype SparseMatrix = SparseMatrix {sparseMatrix :: [[Bool]]}
-
-type Solution = [Position]
-
--- mark an entry to be true if it is in the list of 2d coordinates
-fromSparseMatrix :: Int -> Solution -> SparseMatrix
-fromSparseMatrix dim xs = SparseMatrix $ do
-  row <- [1 .. dim]
-  pure $ do
-    col <- [1 .. dim]
-    pure $ Position row col `elem` xs
-
-sparseMatrixToDoc :: SparseMatrix -> Doc ann
-sparseMatrixToDoc (SparseMatrix xs) =
-  vsep $ map (hsep . map showChar) xs
+prettySolution :: (?dimension :: Dimension) => Solution -> Doc ann
+prettySolution solution =
+  vsep $
+    map (hsep . map showChar) $
+      mkSquareMatrix ?dimension Position
   where
-    showChar col = if col then "♛" else "."
+    showChar :: Position -> Doc ann
+    showChar = bool "." "♛" . (`Set.member` solution)

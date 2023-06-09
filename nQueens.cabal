@@ -40,6 +40,7 @@ common shared
     FlexibleInstances
     GADTSyntax
     GeneralisedNewtypeDeriving
+    ImplicitParams
     ImportQualifiedPost
     InstanceSigs
     KindSignatures
@@ -118,10 +119,10 @@ library nQueens-lib
   hs-source-dirs:  src
   exposed-modules:
     NQueens
-    NQueens.NaiveList
+    NQueens.BacktrackingSearch
     NQueens.Pretty
-    NQueens.Utils
     NQueens.Types
+    NQueens.Utils
 
 executable nQueens
   import:        shared
@@ -134,8 +135,7 @@ test-suite nQueens-test
   main-is:        Main.hs
   hs-source-dirs: test
   build-depends:  nQueens-lib
-  other-modules:  
-    Spec.NaiveList
+  other-modules:  Spec.BacktrackingSearch
 
 test-suite nQueens-space
   import:         shared, test-deps
