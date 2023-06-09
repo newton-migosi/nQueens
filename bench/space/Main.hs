@@ -23,6 +23,8 @@ listMonad = do
   func "list (n=5, s=10)" solver 5
   func "list (n=8, s=92)" solver 8
   func "list (n=10, s=724)" solver 10
+  func "list (n=12, s=14200)" solver 12
+  func "list (n=14, s=73712)" solver 14
 
 logictMonad :: Weigh ()
 logictMonad = do
@@ -34,3 +36,5 @@ logictMonad = do
   func "logict (n=5, s=10)" solver 5
   func "logict (n=8, s=92)" solver 8
   func "logict (n=10, s=724)" solver 10
+  func "logict (n=12, s=14200)" solver 12
+  func "logict (n=14, s=73712)" solver 14

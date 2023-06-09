@@ -24,6 +24,8 @@ listMonad =
       , bench "list (n=5, s=10)" $ nf solver 5
       , bench "list (n=8, s=92)" $ nf solver 8
       , bench "list (n=10, s=724)" $ nf solver 10
+      , bench "list (n=12, s=14200)" $ nf solver 12
+      , bench "list (n=14, s=73712)" $ nf solver 14
       ]
 
 logictMonad :: [Benchmark]
@@ -36,4 +38,6 @@ logictMonad =
       , bench "logict (n=5, s=10)" $ nf solver 5
       , bench "logict (n=8, s=92)" $ nf solver 8
       , bench "logict (n=10, s=724)" $ nf solver 10
+      , bench "logict (n=12, s=14200)" $ nf solver 12
+      , bench "logict (n=14, s=73712)" $ nf solver 14
       ]
