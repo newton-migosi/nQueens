@@ -1,25 +1,29 @@
 module NQueens.BacktrackingSearch where
 
-import Control.Monad.Logic (Logic)
 import Data.Set qualified as Set
 
+import Control.Monad.Logic (Logic)
 import NQueens.Types (Dimension, Position (Position), Solution, safe)
 
-solve ::
+solve' ::
   forall (m :: Type -> Type).
-  (Monad m, Alternative m, ?dimension :: Dimension) =>
-  m Solution
-solve = foldlM stepFn Set.empty [1 .. ?dimension]
+  (?dimension :: Dimension, MonadPlus m) =>
+  StateT Solution m ()
+solve' =
+  forM_ [1 .. ?dimension] $ \row -> do
+    col <- choose [1 .. ?dimension]
+    let queen = Position row col
+    guardM $ gets $ all (safe queen)
+    modify' $ Set.insert queen
   where
-    stepFn alreadyPlaced row = do
-      col <- choose [1 .. ?dimension]
-      let queen = Position row col
-      guard $ all (safe queen) alreadyPlaced
-      pure (Set.insert queen alreadyPlaced)
-
     choose = asum . fmap pure
     {-# INLINE choose #-}
 
+solve ::
+  forall (m :: Type -> Type).
+  (?dimension :: Dimension, MonadPlus m) =>
+  m Solution
+solve = execStateT solve' Set.empty
 --------------------------------------------------------------------------------
 
 {-# SPECIALIZE solve :: (?dimension :: Dimension) => [Solution] #-}
